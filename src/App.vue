@@ -1,16 +1,29 @@
 <template>
 <div id="app">
-    <HeaderBoolflix />
+    <HeaderBoolflix @research="strSearchMovies"/>
+    <MainBoolflix :stringa-ricerca="strSearch"/>
   </div>
 </template>
 
 <script>
 import HeaderBoolflix from './components/HeaderBoolflix.vue'
+import MainBoolflix from './components/MainBoolflix.vue'
 
 export default {
   name: 'App',
   components: {
-    HeaderBoolflix
+    HeaderBoolflix,
+    MainBoolflix
+  },
+  data () {
+    return {
+      strSearch: ''
+    }
+  },
+  methods: {
+    strSearchMovies (element) {
+      this.strSearch = element
+    }
   }
 }
 </script>

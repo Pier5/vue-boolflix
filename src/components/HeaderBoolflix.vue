@@ -1,14 +1,23 @@
 <template>
   <header>
     <h1 class="logo-text">Boolflix</h1>
-    <input class="search-bar" type="text" placeholder="Cerca il tuo film preferito">
-    <button class="btn-search">Cerca</button>
+    <SearchBar @search="getSearch"/>
   </header>
 </template>
 
 <script>
+import SearchBar from './SearchBar.vue'
+
 export default {
-  name: 'HeaderBoolflix'
+  name: 'HeaderBoolflix',
+  components: {
+    SearchBar
+  },
+  methods: {
+    getSearch (element) {
+      this.$emit('research', element)
+    }
+  }
 }
 </script>
 
@@ -23,16 +32,6 @@ header {
     color: red;
     margin-right: auto;
     text-transform: uppercase;
-  }
-  .search-bar {
-    height: 2rem;
-    padding: .4rem;
-  }
-  .btn-search {
-    height: 2rem;
-    color: white;
-    background-color: red;
-    padding: .3rem;
   }
 }
 </style>
