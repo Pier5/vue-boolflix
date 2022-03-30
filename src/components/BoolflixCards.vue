@@ -20,8 +20,8 @@
         </div>
         <div class="ratings">
           <h2 class="text-description">Voto:</h2>
-          <div v-if="CardData.vote_average == 0">Ancora nessun voto assegnato</div>
-          <span v-else v-for="stars in starsRating(CardData.vote_average)" :key="stars" >&#9733;</span>
+          <i class="fa-solid fa-star" v-for="star in starsRating(CardData.vote_average)" :key="star.id"></i>
+          <i class="fa-regular fa-star" v-for="starless in starsRatingDifferece(CardData.vote_average)" :key="starless.id"></i>
         </div>
       </div>
     </div>
@@ -46,7 +46,8 @@ export default {
         'pt',
         'ru',
         'es'
-      ]
+      ],
+      maxStarsVote: 10
     }
   },
   methods: {
@@ -57,6 +58,9 @@ export default {
     },
     starsRating (vote) {
       return Math.ceil(vote / 2)
+    },
+    starsRatingDifferece (vote) {
+      return Math.floor((this.maxStarsVote - vote) / 2)
     }
   }
 }
@@ -111,6 +115,7 @@ export default {
   h1,
   h2 {
     color: #D65076;
+    font-size: 1.2rem;
   }
   .text-description {
     color: #45B8AC;
