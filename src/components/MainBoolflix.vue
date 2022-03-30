@@ -1,6 +1,8 @@
 <template>
   <main>
-    <section v-show="movies.length" class="movies-titles">
+    <div class="no-results" v-if="movies.length == ''">Nessun risultato trovato. Riprova la ricerca</div>
+    <div v-else>
+      <section v-show="movies.length" class="movies-titles">
       <h1>Lista film:</h1>
       <div class="container">
         <BoolflixCards
@@ -20,6 +22,7 @@
         />
       </div>
     </section>
+    </div>
   </main>
 </template>
 
@@ -39,7 +42,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
+h1,
+.no-results {
   margin-left: 65px;
   padding-top: 100px;
   text-transform: uppercase;
