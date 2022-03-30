@@ -40,7 +40,8 @@ export default {
 
 <style lang="scss" scoped>
 h1 {
-  margin: 20px 10px;
+  margin-top: 40px;
+  margin-left: 65px;
   text-transform: uppercase;
   color: white;
 }
