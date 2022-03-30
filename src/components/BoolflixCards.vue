@@ -9,7 +9,10 @@
         <h2>{{ CardData.title ? CardData.title : CardData.name }}</h2>
         <lang-flag v-if="checkLangFlag(CardData.original_language)" :iso="CardData.original_language" class="lang" />
         <div v-else class="lang">{{ CardData.original_language }}</div>
-        <div class="rating">{{ CardData.vote_average }}</div>
+        <div class="ratings">
+          <div v-if="CardData.vote_average == 0">No votes yet</div>
+          <span v-else v-for="stars in starsRating(CardData.vote_average)" :key="stars" >&#9733;</span>
+        </div>
       </div>
     </div>
   </div>
@@ -41,12 +44,18 @@ export default {
       if (this.arrLang.includes(flag)) {
         return this.arrLang
       }
+    },
+    starsRating (vote) {
+      return Math.ceil(vote / 2)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.ratings {
+  padding-top: .5rem;
+}
 .cover-img {
   width: 100%;
   height: 100%;
