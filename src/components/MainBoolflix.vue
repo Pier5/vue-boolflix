@@ -42,6 +42,7 @@ export default {
 h1 {
   margin: 20px 10px;
   text-transform: uppercase;
+  color: white;
 }
 .container {
   display: flex;
