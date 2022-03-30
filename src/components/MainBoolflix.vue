@@ -1,17 +1,30 @@
 <template>
   <main>
-    <div class="container">
-      <MoviesCards
-      v-for="element in movies"
-      :key="element.id"
-      :card-data="element"
-      />
-    </div>
+    <section v-show="movies.length" class="movies-titles">
+      <h1>Lista film:</h1>
+      <div class="container">
+        <BoolflixCards
+          v-for="element in movies"
+          :key="element.id"
+          :card-data="element"
+        />
+      </div>
+    </section>
+    <section v-show="movies.length" class="series-titles">
+      <h1>Lista serie tv:</h1>
+      <div class="container">
+        <BoolflixCards
+          v-for="element in series"
+          :key="element.id"
+          :card-data="element"
+        />
+      </div>
+    </section>
   </main>
 </template>
 
 <script>
-import MoviesCards from './MoviesCards.vue'
+import BoolflixCards from './BoolflixCards.vue'
 
 export default {
   name: 'MainBoolflix',
@@ -20,11 +33,20 @@ export default {
     series: Array
   },
   components: {
-    MoviesCards
+    BoolflixCards
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+h1 {
+  margin: 20px 10px;
+  text-transform: uppercase;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
 </style>
