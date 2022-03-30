@@ -1,28 +1,25 @@
 <template>
   <main>
-    <div class="no-results" v-if="movies.length == ''">Nessun risultato trovato. Riprova la ricerca</div>
-    <div v-else>
-      <section v-show="movies.length" class="movies-titles">
-      <h1>Lista film:</h1>
-      <div class="container">
-        <BoolflixCards
-          v-for="element in movies"
-          :key="element.id"
-          :card-data="element"
-        />
-      </div>
-    </section>
-    <section v-show="series.length" class="series-titles">
-      <h1>Lista serie tv:</h1>
-      <div class="container">
-        <BoolflixCards
-          v-for="element in series"
-          :key="element.id"
-          :card-data="element"
-        />
-      </div>
-    </section>
+    <section v-show="movies.length" class="movies-titles">
+    <h1>Lista film:</h1>
+    <div class="container">
+      <BoolflixCards
+        v-for="element in movies"
+        :key="element.id"
+        :card-data="element"
+      />
     </div>
+  </section>
+  <section v-show="series.length" class="series-titles">
+    <h1>Lista serie tv:</h1>
+    <div class="container">
+      <BoolflixCards
+        v-for="element in series"
+        :key="element.id"
+        :card-data="element"
+      />
+    </div>
+  </section>
   </main>
 </template>
 
