@@ -6,8 +6,10 @@
       </div>
       <div class="flip-card-back">
         <div class="original-name">
-          <h1 class="text-description">Titolo originale:</h1>
-          <h1>{{ CardData.original_title ? CardData.original_title : CardData.original_name }}</h1>
+          <h1 v-if="CardData.original_title !== CardData.title" class="text-description">Titolo originale:</h1>
+          <h1 v-else></h1>
+          <h1 v-if="CardData.original_title !== CardData.title">{{ CardData.original_title ? CardData.original_title : CardData.original_name }}</h1>
+          <h1 v-else></h1>
         </div>
         <div class="title-name">
           <h2 class="text-description">Titolo:</h2>
@@ -72,6 +74,7 @@ export default {
   width: 320px;
   height: 500px;
   margin: 20px;
+  border: 5px solid  #34568B;
 }
 .flip-card-inner {
   position: relative;

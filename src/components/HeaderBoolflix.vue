@@ -29,6 +29,9 @@ header {
   background-color: black;
   height: 5rem;
   padding: 0 1rem;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
   .logo-text {
     color: red;
     margin-right: auto;
