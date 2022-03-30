@@ -1,6 +1,6 @@
 <template>
   <div class="cards">
-    <h1>{{ cardData.original_title }}</h1>
+    <h1>{{ CardData.original_title }}</h1>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: 'MoviesCards',
   props: {
-    cardData: Object
+    CardData: Object
   }
 }
 </script>
