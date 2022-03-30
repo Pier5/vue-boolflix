@@ -2,12 +2,15 @@
   <div class="cards">
     <h1>{{ CardData.original_title ? CardData.original_title : CardData.original_name }}</h1>
     <h2>{{ CardData.title ? CardData.title : CardData.name }}</h2>
-    <div class="lang">{{ CardData.original_language }}</div>
+    <div class="lang">
+      <lang-flag :iso="CardData.original_language" />
+    </div>
     <div class="rating">{{ CardData.vote_average }}</div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'MoviesCards',
   props: {
@@ -33,6 +36,7 @@ export default {
   }
   .lang {
     padding-bottom: 1.2rem;
+    font-size: 1.5rem;
   }
 }
 </style>

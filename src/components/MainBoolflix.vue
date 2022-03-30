@@ -10,7 +10,7 @@
         />
       </div>
     </section>
-    <section v-show="movies.length" class="series-titles">
+    <section v-show="series.length" class="series-titles">
       <h1>Lista serie tv:</h1>
       <div class="container">
         <BoolflixCards
