@@ -2,7 +2,8 @@
   <div class="flip-card">
     <div class="flip-card-inner">
       <div class="flip-card-front">
-        <img class="cover-img" :src="'https://image.tmdb.org/t/p/w342' + CardData.poster_path" :alt="CardData.original_title ? CardData.original_title : CardData.original_name">
+        <img v-if="CardData.poster_path != null" class="cover-img" :src="'https://image.tmdb.org/t/p/w342' + CardData.poster_path" :alt="CardData.original_title ? CardData.original_title : CardData.original_name">
+        <img v-else :src="'https://picsum.photos/310/490'" :alt="CardData.original_title ? CardData.original_title : CardData.original_name">
       </div>
       <div class="flip-card-back">
         <div class="original-name">
@@ -23,15 +24,23 @@
           <i class="fa-solid fa-star" v-for="star in starsRating(CardData.vote_average)" :key="star.id"></i>
           <i class="fa-regular fa-star" v-for="starless in starsRatingDifferece(CardData.vote_average)" :key="starless.id"></i>
         </div>
+        <div class="ratings">
+          <h1>{{ CardData.overview }}</h1>
+        </div>
+        <div class="cast">
+          <h2 class="text-description">Cast:</h2>
+          <div v-for="actor in arrMoviesActors" :key="actor.credit_id">{{ actor.name }}</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
-  name: 'MoviesCards',
+  name: 'BoolflixCards',
   props: {
     CardData: Object
   },
@@ -47,8 +56,23 @@ export default {
         'ru',
         'es'
       ],
+      arrMoviesActors: null,
+      arrSeriesActors: null,
       maxVote: 10
     }
+  },
+  created () {
+    axios.get(`https://api.themoviedb.org/3/movie/${this.CardData.id}/credits?api_key=553882726aa4b4cb9f8231098d4aef32`)
+      .then((response) => {
+        this.arrMoviesActors = response.data.cast
+        this.arrMoviesActors.splice(5)
+      })
+      .catch(() => {
+        const error = document.createElement('div')
+        const container = document.querySelector('.cast')
+        error.innerHTML = 'File non trovato'
+        container.append(error)
+      })
   },
   methods: {
     checkLangFlag (flag) {
@@ -106,16 +130,18 @@ export default {
   background-color: #181818;
   color: white;
   transform: rotateY(180deg);
+  overflow-y: auto;
   .original-name,
   .title-name,
   .language-flag,
-  .ratings {
-    margin: 1.4rem;
+  .ratings,
+  .cast {
+    margin: 1.1rem;
   }
   h1,
   h2 {
     color: #D65076;
-    font-size: 1.2rem;
+    font-size: .8rem;
   }
   .text-description {
     color: #45B8AC;
