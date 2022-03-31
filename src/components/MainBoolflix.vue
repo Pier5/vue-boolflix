@@ -1,25 +1,31 @@
 <template>
   <main>
-    <section v-show="movies.length" class="movies-titles">
-    <h1>Lista film:</h1>
-    <div class="container">
-      <BoolflixCards
-        v-for="element in movies"
-        :key="element.id"
-        :card-data="element"
-      />
-    </div>
+    <div class="no-results" v-if="movies == null">Cerca tra migliaia di film e serie tv</div>
+    <div class="no-results" v-else-if="movies == '' && series == ''">Nessun risultato. Prova a cercare ancora</div>
+    <div v-else>
+      <section class="movies-titles">
+      <h1 v-if="movies == ''"></h1>
+      <h1 v-else>Lista film:</h1>
+      <div class="container">
+        <BoolflixCards
+          v-for="element in movies"
+          :key="element.id"
+          :card-data="element"
+        />
+      </div>
+    </section>
+    <section class="series-titles">
+      <h1 v-if="series == ''"></h1>
+      <h1 v-else>Lista serie tv:</h1>
+      <div class="container">
+        <BoolflixCards
+          v-for="element in series"
+          :key="element.id"
+          :card-data="element"
+        />
+      </div>
   </section>
-  <section v-show="series.length" class="series-titles">
-    <h1>Lista serie tv:</h1>
-    <div class="container">
-      <BoolflixCards
-        v-for="element in series"
-        :key="element.id"
-        :card-data="element"
-      />
     </div>
-  </section>
   </main>
 </template>
 
@@ -39,11 +45,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
+h1,
+.no-results {
   margin-left: 65px;
   padding-top: 100px;
   text-transform: uppercase;
   color: white;
+}
+.no-results {
+  font-size: 1.5rem;
 }
 .container {
   display: flex;

@@ -19,8 +19,8 @@ export default {
   data () {
     return {
       api_key: '553882726aa4b4cb9f8231098d4aef32',
-      arrMovies: [],
-      arrSeries: []
+      arrMovies: null,
+      arrSeries: null
     }
   },
   methods: {

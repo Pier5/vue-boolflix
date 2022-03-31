@@ -3,7 +3,7 @@
     <h1 class="logo-text">Boolflix</h1>
     <form @submit.prevent="$emit('search', searchText)">
       <label for="search">
-        <input class="search-bar" type="text" placeholder="Cerca il tuo film preferito" v-model="searchText">
+        <input @keyup.enter="searchText=''" class="search-bar" type="text" placeholder="Cerca il tuo film preferito" v-model="searchText">
         <button class="btn-search">Cerca</button>
       </label>
     </form>

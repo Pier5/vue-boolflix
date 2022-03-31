@@ -2,7 +2,7 @@
   <div class="flip-card">
     <div class="flip-card-inner">
       <div class="flip-card-front">
-        <img class="cover-img" :src="'https://image.tmdb.org/t/p/w300' + CardData.poster_path" :alt="CardData.original_title ? CardData.original_title : CardData.original_name">
+        <img class="cover-img" :src="'https://image.tmdb.org/t/p/w342' + CardData.poster_path" :alt="CardData.original_title ? CardData.original_title : CardData.original_name">
       </div>
       <div class="flip-card-back">
         <div class="original-name">
@@ -15,7 +15,7 @@
         </div>
         <div class="language-flag">
           <h2 class="text-description">Lingua:</h2>
-          <lang-flag v-if="checkLangFlag(CardData.original_language)" :iso="CardData.original_language" class="lang" />
+          <lang-flag v-if="checkLangFlag(CardData.original_language)" :iso="CardData.original_language" :squared="false" class="lang" />
           <div v-else class="lang">{{ CardData.original_language }}</div>
         </div>
         <div class="ratings">
@@ -47,7 +47,7 @@ export default {
         'ru',
         'es'
       ],
-      maxStarsVote: 10
+      maxVote: 10
     }
   },
   methods: {
@@ -60,7 +60,7 @@ export default {
       return Math.ceil(vote / 2)
     },
     starsRatingDifferece (vote) {
-      return Math.floor((this.maxStarsVote - vote) / 2)
+      return Math.floor((this.maxVote - vote) / 2)
     }
   }
 }
@@ -125,5 +125,8 @@ export default {
     padding-bottom: 1.2rem;
     font-size: 1.5rem;
   }
+  .fa-solid {
+  color: gold;
+}
 }
 </style>
