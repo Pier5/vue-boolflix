@@ -25,11 +25,8 @@
           <i class="fa-regular fa-star" v-for="starless in starsRatingDifferece(CardData.vote_average)" :key="starless.id"></i>
         </div>
         <div class="ratings">
+          <h2 v-if="CardData.overview !== ''" class="text-description">Trama:</h2>
           <h1>{{ CardData.overview }}</h1>
-        </div>
-        <div class="cast">
-          <h2 class="text-description">Cast:</h2>
-          <div v-for="actor in arrMoviesActors" :key="actor.credit_id">{{ actor.name }}</div>
         </div>
       </div>
     </div>
@@ -37,12 +34,13 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   name: 'BoolflixCards',
   props: {
-    CardData: Object
+    CardData: Object,
+    movies: Array,
+    series: Array
   },
   data () {
     return {
@@ -56,23 +54,8 @@ export default {
         'ru',
         'es'
       ],
-      arrMoviesActors: null,
-      arrSeriesActors: null,
       maxVote: 10
     }
-  },
-  created () {
-    axios.get(`https://api.themoviedb.org/3/movie/${this.CardData.id}/credits?api_key=553882726aa4b4cb9f8231098d4aef32`)
-      .then((response) => {
-        this.arrMoviesActors = response.data.cast
-        this.arrMoviesActors.splice(5)
-      })
-      .catch(() => {
-        const error = document.createElement('div')
-        const container = document.querySelector('.cast')
-        error.innerHTML = 'File non trovato'
-        container.append(error)
-      })
   },
   methods: {
     checkLangFlag (flag) {
