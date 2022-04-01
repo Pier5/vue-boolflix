@@ -28,19 +28,23 @@
           <h2 v-if="CardData.overview !== ''" class="text-description">Trama:</h2>
           <h1>{{ CardData.overview }}</h1>
         </div>
+        <div class="cast">
+          <h2 v-if="arrCastActors.length !== 0" class="text-description">Cast:</h2>
+          <div v-for="actor in arrCastActors" :key="actor.id + CardData.id">{{ actor.name }}</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
   name: 'BoolflixCards',
   props: {
     CardData: Object,
-    movies: Array,
-    series: Array
+    cardType: String
   },
   data () {
     return {
@@ -54,8 +58,18 @@ export default {
         'ru',
         'es'
       ],
-      maxVote: 10
+      maxVote: 10,
+      arrCastActors: []
     }
+  },
+  created () {
+    axios(`https://api.themoviedb.org/3/${this.cardType}/${this.CardData.id}/credits?api_key=553882726aa4b4cb9f8231098d4aef32`)
+      .then((response) => {
+        this.arrCastActors = response.data.cast.splice(0, 5)
+      })
+      .catch(() => {
+
+      })
   },
   methods: {
     checkLangFlag (flag) {

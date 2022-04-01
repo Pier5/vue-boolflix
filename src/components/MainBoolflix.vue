@@ -11,6 +11,7 @@
           v-for="element in movies"
           :key="element.id"
           :card-data="element"
+          :card-type="listType"
         />
       </div>
     </section>
@@ -22,6 +23,7 @@
           v-for="element in series"
           :key="element.id"
           :card-data="element"
+          :card-type="listTop"
         />
       </div>
   </section>
@@ -34,6 +36,12 @@ import BoolflixCards from './BoolflixCards.vue'
 
 export default {
   name: 'MainBoolflix',
+  data () {
+    return {
+      listType: 'movie',
+      listTop: 'tv'
+    }
+  },
   props: {
     movies: Array,
     series: Array
