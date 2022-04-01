@@ -23,7 +23,7 @@
           v-for="element in series"
           :key="element.id"
           :card-data="element"
-          :card-type="listTop"
+          :card-type="listSeries"
         />
       </div>
   </section>
@@ -39,7 +39,7 @@ export default {
   data () {
     return {
       listType: 'movie',
-      listTop: 'tv'
+      listSeries: 'tv'
     }
   },
   props: {
